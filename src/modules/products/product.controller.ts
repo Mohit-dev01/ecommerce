@@ -24,4 +24,34 @@ export const productController = {
       next(error);
     }
   },
+
+  async createProduct(req: Request, res: Response, next: NextFunction) {
+    try {
+      const product = await productService.createProduct(req.body);
+      return sendSuccess(res, "Product created", product, 201);
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  async updateProduct(req: Request, res: Response, next: NextFunction) {
+    try {
+      const product = await productService.updateProduct(
+        req.params.id as string,
+        req.body,
+      );
+      return sendSuccess(res, "Product updated", product);
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  async deleteProduct(req: Request, res: Response, next: NextFunction) {
+    try {
+      await productService.deleteProduct(req.params.id as string);
+      return sendSuccess(res, "Product deleted", null);
+    } catch (e) {
+      next(e);
+    }
+  },
 };

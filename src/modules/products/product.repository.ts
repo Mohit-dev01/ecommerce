@@ -33,4 +33,23 @@ export const productRepository = {
       },
     });
   },
+
+  create(data: any) {
+    return prisma.product.create({
+      data,
+    });
+  },
+
+  update(id: string, data: any) {
+    return prisma.product.update({
+      where: { id },
+      data,
+    });
+  },
+
+  delete(id: string) {
+    return prisma.product.delete({
+      where: { id },
+    });
+  },
 };
